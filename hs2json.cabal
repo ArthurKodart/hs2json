@@ -35,10 +35,10 @@ license:            BSD-3-Clause
 license-file:       LICENSE
 
 -- The package author(s).
-author:             Pacelle Henrique
+author:             Arthur Kodart, Pacelle Henrique
 
 -- An email address to which users can send suggestions, bug reports, and patches.
-maintainer:         pacellehenrique18@gmail.com
+maintainer:         arthurguimaraespds@gmail.com, pacellehenrique18@gmail.com
 
 -- A copyright notice.
 -- copyright:
@@ -60,7 +60,8 @@ library
 
     -- Modules exported by the library.
     exposed-modules:
-        SimpleJSON
+        SimpleJSON,
+        PutJSON
 
     -- Modules included in this library but not exported.
     -- other-modules:
@@ -69,7 +70,7 @@ library
     -- other-extensions:
 
     -- Other library packages from which modules are imported.
-    build-depends:    base ^>=4.20.2.0
+    build-depends:    base >= 4.14 && < 5
 
     -- Directories containing source files.
     hs-source-dirs:   src

@@ -2,15 +2,14 @@ module Prettify where
 
 import Prelude hiding ((<>))
 
-data Doc = Empty
-         | Char Char
-         | Text String
-         | Line
-         | Concat Doc Doc
-         | Union Doc Doc
-         deriving (Show, Eq)
+data Doc = ToBeDefined
+         deriving (Show)
 
-(<>) :: Doc -> Doc -> Doc
-Empty <> y = y
-x <> Empty = x
-x <> y     = x `Concat` y
+string :: String -> Doc
+string str = undefined
+
+text :: String -> Doc
+text str = undefined
+
+double :: Double -> Doc
+double num = undefined

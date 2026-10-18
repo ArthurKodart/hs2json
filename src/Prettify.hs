@@ -14,7 +14,7 @@ module Prettify
     , group
     , softline
     , compact
-    , pretty
+    -- , pretty
     ) where
 
 import Prelude hiding ((<>))
@@ -77,3 +77,17 @@ punctuate :: Doc -> [Doc] -> [Doc]
 punctuate p []     = []
 punctuate p [d]    = [d]
 punctuate p (d:ds) = (d <> p) : punctuate p ds
+
+compact :: Doc -> String
+compact x = transform [x]
+  where
+    transform [] = ""
+    transform (d:ds) =
+        case d of
+            Empty        -> transform ds
+            Char c       -> c : transform ds
+            Text s       -> s ++ transform ds
+            Line         -> '\n' : transform ds
+            a `Concat` b -> transform (a:b:ds)
+            _ `Union` b  -> transform (b:ds)
+

@@ -1,32 +1,78 @@
-module Prettify where
+module Prettify
+    (
+      Doc
+    , empty
+    , char
+    , text
+    , double
+    , line
+    , (<>)
+    , hcat
+    , fsep
+    , (</>)
+    , punctuate
+    , group
+    , softline
+    , compact
+    , pretty
+    ) where
 
 import Prelude hiding ((<>))
 
-data Doc = ToBeDefined
-         deriving (Show)
+data Doc = Empty
+         | Char Char
+         | Text String
+         | Line
+         | Concat Doc Doc
+         | Union Doc Doc
+           deriving (Show, Eq)
 
-(<>) :: Doc -> Doc -> Doc
-a <> b = undefined
+empty :: Doc
+empty = Empty
 
 char :: Char -> Doc
-char c = undefined
-
-hcat :: [Doc] -> Doc
-hcat xs = undefined
-
-string :: String -> Doc
-string str = undefined
+char c = Char c
 
 text :: String -> Doc
-text str = undefined
+text "" = Empty
+text s  = Text s
 
 double :: Double -> Doc
-double num = undefined
+double d = text (show d)
+
+line :: Doc
+line = Line
+
+(<>) :: Doc -> Doc -> Doc
+Empty <> y = y
+x <> Empty = x
+x <> y = x `Concat` y
+
+hcat :: [Doc] -> Doc
+hcat = fold (<>)
+
+fold :: (Doc -> Doc -> Doc) -> [Doc] -> Doc
+fold f = foldr f empty
 
 fsep :: [Doc] -> Doc
-fsep xs = undefined
+fsep = fold (</>)
 
--- src/Prettify.hs
+(</>) :: Doc -> Doc -> Doc
+x </> y = x <> softline <> y
+
+softline :: Doc
+softline = group line
+
+group :: Doc -> Doc
+group x = flatten x `Union` x
+
+flatten :: Doc -> Doc
+flatten (x `Concat` y) = flatten x `Concat` flatten y
+flatten Line           = Char ' '
+flatten (x `Union` _)  = flatten x
+flatten other          = other
+
+
 punctuate :: Doc -> [Doc] -> [Doc]
 punctuate p []     = []
 punctuate p [d]    = [d]

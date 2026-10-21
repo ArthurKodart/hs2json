@@ -48,7 +48,7 @@ hs2json/
 - `Prettify.hs`: define a estrutura `Doc` e funções auxiliares para construir, combinar e formatar documentos.
 - `PrettyJSON.hs`: integra a representação dos valores JSON com as operações de formatação de documentos.
 - `QuickTestes.hs`: contém o algoritmo de ordenação `qsort` e propriedades utilizadas para verificar seu comportamento.
-- `Spec.hs`: reúne os testes automatizados das funções do módulo `Prettify`.
+- `Spec.hs`: reúne a instância Arbitrary para JValue (com controle de profundidade recursiva) e a suíte de testes automatizados para os módulos Prettify e SimpleJSON.
 
 ## Pré-requisitos
 
@@ -105,6 +105,14 @@ Entre as propriedades verificadas no módulo `Prettify`, estão:
 - `prop_hcat`: verifica a combinação horizontal de documentos.
 - `prop_punctuate'`: verifica a inserção de separadores entre documentos.
 - `prop_compact_text`: verifica se a compactação de um documento criado com `text` recupera a string original.
+
+Módulo `SimpleJSON / PrettyJSON`:
+
+- `prop_getString`: valida a extração segura de strings pelo accessor getString.
+-`prop_getBool`: valida a extração segura de booleanos pelo accessor getBool.
+-`prop_isNull`: valida a checagem do valor JNull.
+-`prop_getArray`: valida a extração segura de listas de JValue.
+-`prop_string_enclosed`: garante que a renderização de strings em JSON mantenha o encapsulamento correto entre aspas.
 
 O QuickCheck gera entradas de teste automaticamente para avaliar as propriedades definidas.
 

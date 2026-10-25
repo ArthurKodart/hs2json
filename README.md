@@ -4,6 +4,12 @@ Projeto desenvolvido em Haskell como parte dos estudos de Programação Funciona
 
 O projeto explora a representação de dados JSON por meio de tipos algébricos, a construção de funções para manipulação e renderização desses dados, a formatação de documentos e a validação de propriedades utilizando testes automatizados.
 
+## Apresentação do Trabalho
+
+Vídeo de apresentação e demonstração do projeto:
+
+- [Vídeo de Apresentação no Google Drive](https://drive.google.com/file/d/1z6j9a3PjUJfcR2naxB_I778aGnL8Okzj/view?usp=sharing)
+
 ## Objetivos
 
 - Compreender os fundamentos da linguagem Haskell.
